@@ -32,12 +32,8 @@ import { GraphQLError, GraphQLFormattedError } from 'graphql';
         return graphQLFormattedError;
       },
     }),
-    CacheModule.register<RedisClientOptions>({
-      store: redisStore,
+    CacheModule.register({
       isGlobal: true,
-
-      host: 'localhost',
-      port: 6379,
     }),
     UsersModule,
     AuthModule,

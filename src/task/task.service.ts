@@ -33,7 +33,10 @@ export class TaskService {
   async updateTask(payload: UpdateTaskInput): Promise<void> {
     try {
       const cacheKey = `${payload.id}-task`;
-      await this.cacheManager.del(cacheKey);
+
+      const v = await this.cacheManager.del(cacheKey);
+      console.log(v);
+      console.log(cacheKey, 0);
       const task = await this.findOne({ id: payload.id });
 
       if (!task) {
@@ -48,7 +51,7 @@ export class TaskService {
           description: payload.description || task.description,
 
           status: payload.status || task.status,
-          completed: payload.completed || task.completed,
+          completed: payload.completed,
         },
       });
     } catch (error) {
@@ -99,12 +102,12 @@ export class TaskService {
   async findOne(payload: FindOneTaskInput): Promise<TaskEntity> {
     try {
       const cacheKey = `${payload.id}-task`;
-      console.log(cacheKey);
+      console.log(cacheKey, 1);
 
       const cachedPost = await this.cacheManager.get(cacheKey);
       if (cachedPost) {
         const task = JSON.parse(cachedPost);
-        console.log(task, 1);
+        console.log(task, 2);
         return task as unknown as TaskEntity;
       }
       const task = await this.prisma.task.findFirst({
@@ -116,7 +119,7 @@ export class TaskService {
       });
 
       const cacheValue = JSON.stringify(task);
-      await this.cacheManager.set(cacheKey, cacheValue, 1000);
+      await this.cacheManager.set(cacheKey, cacheValue, 10);
       return task as unknown as TaskEntity;
     } catch (error) {
       console.log(error);
@@ -174,7 +177,7 @@ export class TaskService {
         },
       });
       const cacheValue = JSON.stringify(task);
-      await this.cacheManager.set(cacheKey, cacheValue, 1000);
+      await this.cacheManager.set(cacheKey, cacheValue, 10);
       return task as unknown as TaskEntity;
     } catch (error) {
       console.log(error);

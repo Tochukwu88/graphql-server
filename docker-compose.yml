@@ -1,37 +1,13 @@
 version: '3'
 services:
-  api:
-    build:
-      dockerfile: Dockerfile
-      context: .
-      target: development
-    volumes:
-      - '.:/usr/src/app'
-    env_file:
-      - .env
-    command: 'yarn run start:dev'
-    ports:
-      - '3000:3000'
-    depends_on:
-      - redis
-      - db
-  redis:
-    image: redis:latest
-    restart: always
-    ports:
-      - '6379:6379'
-    volumes:
-      - redis:/data
-
   db:
     image: postgres:latest
+    container_name: postgres
     restart: always
     ports:
-      - '5432:5432'
+      - '5433:5433'
+    command: -p 5433
     environment:
-      - POSTGRES_USER =earnipay
+      - POSTGRES_USER=earnipay
       - POSTGRES_PASSWORD=1234
       - POSTGRES_DB=earnipayDb
-volumes:
-  redis:
-    driver: local
