@@ -1,5 +1,6 @@
 ## **Todo list built with Nestjs , Graphql ,Postgresql with PrismaOrm**
 **Description**
+
 An application for managing day-to-day activities
 
 **Running the application**
