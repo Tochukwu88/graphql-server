@@ -4,6 +4,7 @@
 An application for managing day-to-day activities
 
 **Running the application**
+
    The command below dockerizes the application as well as spins up a redis server and a postgres database
    
 
@@ -14,6 +15,7 @@ An application for managing day-to-day activities
     docker compose up
  
 **Usage**
+
 you can test the graphql api by using the graphql playground, simply open:
 
     http://localhost:3000/graphql
