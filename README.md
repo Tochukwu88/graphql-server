@@ -1,3 +1,4 @@
+
 ## **Todo list built with Nestjs , Graphql ,Postgresql with PrismaOrm**
 
 **Description**
@@ -10,9 +11,31 @@ The command below dockerizes the application as well as spins up a redis server 
 
 > to avoid errors make sure the database credentials in the .env matches the ones in the docker compose file
 
-> if you intend to use the postgres/redis that docker compose spins up make sure no instance of postgres/ redis is currently running on your system else the application will attempt to connect with that
+> if you intend to use the postgres that docker compose spins up make sure the port is different that which your local postgres server runs else prisma will attempt to connect with that
 
-    docker compose up
+    cd into the app directory
+
+to spin up postgres with docker compose
+
+ 
+    docker compose up -d --build
+    
+install dependencies
+
+
+    yarn install
+
+generate and migrate tables to db
+
+
+    npx prisma generate
+
+    npx prisma migrate dev --name init
+
+start application
+
+    yarn run start:dev
+
 
 **Usage**
 
@@ -20,12 +43,14 @@ you can test the graphql api by using the graphql playground, simply open:
 
     http://localhost:3000/graphql
 
+
+
 **Features**
 
 - All CRUD functionalities
 - pagination on the findAllTasks query
 - Authentication and Authorisation using passport and jwt
-- caching using redis
+- caching using nestjs cache
 - ability to add sub tasks
 - update tasks status
 - Searching for tasks by title or description
@@ -39,7 +64,7 @@ you can test the graphql api by using the graphql playground, simply open:
 
 - Nodejs
 - Nestjs(a nodejs framework)
-- Redis
+- nest cache
 - Postgres
 - Prisma (an Object Relational Mapper /Object Document Mapper for database)
 - JWT (Authentication and Authorisation)
@@ -51,4 +76,5 @@ more features can be added to the application for example
 
 - setting priorities to tasks
 - categorising tasks
+- redis store can be user for the cache manager
 - e.t.c
