@@ -1,0 +1,116 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  accessToken: String!
+  user: User!
+}
+
+input CreateSubTaskInput {
+  description: String
+  startDate: DateTime
+  status: String
+  taskId: Int!
+  title: String!
+}
+
+input CreateTaskInput {
+  completed: Boolean
+  description: String
+  startDate: DateTime
+  status: String
+  title: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input FindAllTaskInput {
+  description: String
+  limit: Float
+  page: Float
+  startDate: DateTime
+  status: String
+  title: String
+}
+
+input FindOneTaskInput {
+  id: Int!
+}
+
+type Mutation {
+  createSubTask(createSubTaskInput: CreateSubTaskInput!): TaskResponse!
+  createTask(createTaskInput: CreateTaskInput!): TaskResponse!
+  removeSubTask(id: Int!): TaskResponse!
+  removeTask(id: Int!): TaskResponse!
+  signIn(signInInput: SignInInput!): AuthResponse!
+  signUp(signUpInput: SignUpInput!): AuthResponse!
+  updateSubTask(updateSubTaskInput: UpdateSubTaskInput!): TaskResponse!
+  updateTask(updateTaskInput: UpdateTaskInput!): TaskResponse!
+}
+
+type Query {
+  findAll(findAllTaskInput: FindAllTaskInput!): [TaskEntity!]!
+  findOne(findOneTaskInput: FindOneTaskInput!): TaskEntity!
+  user(id: Int!): User!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input SignUpInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+type SubTaskEntity {
+  description: String
+  id: Float
+  startDate: DateTime
+  status: String
+  title: String
+}
+
+type TaskEntity {
+  completed: Boolean
+  description: String
+  id: Float
+  status: String
+  subTasks: [SubTaskEntity!]
+  title: String
+}
+
+type TaskResponse {
+  message: String!
+}
+
+input UpdateSubTaskInput {
+  completed: Boolean
+  description: String
+  id: Int
+  startDate: DateTime
+  status: String
+  title: String
+}
+
+input UpdateTaskInput {
+  completed: Boolean
+  description: String
+  id: Int!
+  startDate: DateTime
+  status: String
+  title: String
+}
+
+type User {
+  email: String
+  id: Float
+  name: String
+  password: String
+}
