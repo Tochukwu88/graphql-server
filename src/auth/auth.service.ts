@@ -1,4 +1,9 @@
-import { Injectable, Inject, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  Inject,
+  UnauthorizedException,
+  ConflictException,
+} from '@nestjs/common';
 import { SignUpInput } from './dto/signUp.input';
 
 import { UsersService } from 'src/users/users.service';
@@ -17,20 +22,19 @@ export class AuthService {
     private configService: ConfigService,
   ) {}
   async signUp(signup: SignUpInput): Promise<AuthResponse> {
-    try {
-      const hashedPassword = await argon.hash(signup.password);
-      const user = await this.userService.createUser({
-        name: signup.name,
-        email: signup.email,
-        password: hashedPassword,
-      });
-      const accessToken = await this.createToken(user.id, user.email);
-
-      return { accessToken, user };
-    } catch (error) {
-      console.log(error);
-      throw new Error('Error occurred contact support');
+    const userExist = await this.userService.findUserByEmail(signup.email);
+    if (userExist) {
+      throw new ConflictException('User already exists');
     }
+    const hashedPassword = await argon.hash(signup.password);
+    const user = await this.userService.createUser({
+      name: signup.name,
+      email: signup.email,
+      password: hashedPassword,
+    });
+    const accessToken = await this.createToken(user.id, user.email);
+
+    return { accessToken, user };
   }
   async signIn(signin: SignInInput): Promise<AuthResponse> {
     const user = await this.userService.findUserByEmail(signin.email);
