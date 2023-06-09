@@ -1,73 +1,54 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## **Todo list built with Nestjs , Graphql ,Postgresql with PrismaOrm**
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**Description**
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+An application for managing day-to-day activities
 
-## Description
+**Running the application**
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The command below dockerizes the application as well as spins up a redis server and a postgres database
 
-## Installation
+> to avoid errors make sure the database credentials in the .env matches the ones in the docker compose file
 
-```bash
-$ npm install
-```
+> if you intend to use the postgres/redis that docker compose spins up make sure no instance of postgres/ redis is currently running on your system else the application will attempt to connect with that
 
-## Running the app
+    docker compose up
 
-```bash
-# development
-$ npm run start
+**Usage**
 
-# watch mode
-$ npm run start:dev
+you can test the graphql api by using the graphql playground, simply open:
 
-# production mode
-$ npm run start:prod
-```
+    http://localhost:3000/graphql
 
-## Test
+**Features**
 
-```bash
-# unit tests
-$ npm run test
+- All CRUD functionalities
+- pagination on the findAllTasks query
+- Authentication and Authorisation using passport and jwt
+- caching using redis
+- ability to add sub tasks
+- update tasks status
+- Searching for tasks by title or description
 
-# e2e tests
-$ npm run test:e2e
+  **Optimisation Done**
 
-# test coverage
-$ npm run test:cov
-```
+- indexed columns to improve read time from the database
+- caching to improve response time/ latency
 
-## Support
+**Tools and Technologies**
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- Nodejs
+- Nestjs(a nodejs framework)
+- Redis
+- Postgres
+- Prisma (an Object Relational Mapper /Object Document Mapper for database)
+- JWT (Authentication and Authorisation)
+- Docker /Docker compose
+- Typescript
 
-## Stay in touch
+**Improvement**
+more features can be added to the application for example
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- setting priorities to tasks
+- categorising tasks
+- e.t.c
