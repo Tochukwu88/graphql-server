@@ -13,7 +13,7 @@ An application for managing day-to-day activities
     docker compose up
  
 **Usage**
-you can test the graphql api by using the graphql playground . simple open:
+you can test the graphql api by using the graphql playground, simply open:
 
     http://localhost:3000/graphql
 
